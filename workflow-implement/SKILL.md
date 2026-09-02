@@ -1,12 +1,14 @@
 ---
 name: workflow-implement
-description: Executes an approved plan directly or through isolated implementation workers.
+description: Executes a clear change directly or from an approved plan.
 disable-model-invocation: true
 ---
 
 # Workflow: Implement
 
-Run a separate execution workflow from an approved, executor-independent `plan.md`. This skill is an implementation handoff and orchestration layer. The user owns branch and worktree preparation.
+Implement a clear change directly or execute an approved, executor-independent `plan.md`.
+
+Use the smallest safe workflow. A plan and earlier artifacts are optional for a small, cohesive change whose behavior, boundaries, and verification are clear. Escalate to the owning phase only when implementation exposes a material product, architecture, security, data-integrity, or scope decision.
 
 ## Artifact storage
 
@@ -14,19 +16,14 @@ If this phase receives a file-backed workflow and `alx` is now available, port a
 
 ## Boundaries
 
-- Treat the current working directory, branch, and worktree as user-supplied execution context.
-- Do not create, switch, check out, reset, or otherwise manage branches or worktrees.
-- Do not move the work to a harness-managed branch, workspace, or worktree.
-- If the supplied environment cannot be used safely, report the problem and stop. Do not repair Git topology.
-- Use only one writer at a time in the supplied working directory.
+- Use only one writer at a time in the working directory.
 - Do not push or open a pull request.
 
 ## Handoff preparation
 
-1. Read the approved `plan.md`, its supporting artifacts (including the task statement), and repository instructions from the canonical backend.
+1. Read the available plan, supporting artifacts, request context, and repository instructions. For direct implementation, derive the compact contract from the clear request and codebase evidence.
 2. Build a compact implementation contract from those sources. Include:
    - the goal and approved scope;
-   - the exact working directory;
    - the plan and supporting artifact references;
    - relevant design decisions, constraints, and non-goals;
    - the ordered steps, optional milestones, and verification checkpoints;
@@ -34,8 +31,7 @@ If this phase receives a file-backed workflow and `alx` is now available, port a
    - required validation and evidence;
    - expected handoff output;
    - stop and escalation conditions.
-3. Do not redesign the change or replace `plan.md` with an executor-specific plan. Add only the operational context that the executor needs.
-4. Tell every mutation-capable executor that the user prepared the Git environment. The executor must work in the supplied directory and must not create, switch, check out, or reset branches or worktrees.
+3. Do not redesign the change or replace an existing `plan.md` with an executor-specific plan. Add only the operational context that the executor needs.
 
 ## Orchestration
 
@@ -52,9 +48,9 @@ If this phase receives a file-backed workflow and `alx` is now available, port a
    - do not let delegated workers create additional workers unless the coordinator explicitly authorizes it.
 5. Do not create a chain only because the plan contains milestones. Use a chain when separate worker boundaries improve context, review, validation, or recovery.
 6. Require each writer handoff to report changed files, completed and incomplete work, commands with results, validation evidence, commits, surprises, residual risks, and decisions that need user approval.
-7. If review finds fixes inside the approved scope, send the synthesized findings to one sequential fix worker. If a finding requires a behavior, interface, architecture, scope, or plan change, stop and report the owning planning phase.
+7. If review finds fixes inside the accepted scope, apply them directly or send the synthesized findings to one sequential fix worker. Return to planning only when a finding requires a material behavior, interface, architecture, security, data-integrity, or scope decision.
 8. Inspect the final handoff and available diff evidence. Do not claim a check passed unless its result was inspected.
 
 ## Completion
 
-Complete when the selected executor finishes the approved plan, required checks pass, commits are ready when the implementation contract permits them, and the final handoff is inspected. Report the execution shape, changed files, commits, commands and results, residual risks, and any human checks that remain. Then stop. Pushing and draft pull request creation begin only when the user explicitly requests the pull-request phase.
+Complete when the selected executor finishes the accepted scope, required checks pass, commits are ready when the implementation contract permits them, and the final handoff is inspected. Report the execution shape, changed files, commits, commands and results, residual risks, and any human checks that remain. Continue into Pull Request when requested by the user's original goal; otherwise stop.

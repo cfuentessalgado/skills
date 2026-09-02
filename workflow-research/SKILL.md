@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Research the approved questions autonomously as a factual documentarian. The Research context must not know what will be built.
 
+Use the smallest safe workflow. Research is optional when the relevant facts are already supplied, established, or immaterial to the risk of the change. When this phase is used, preserve its context firewall.
+
 ## Artifact storage
 
 - If this phase receives a file-backed workflow and `alx` is now available, port it before research. Transfer non-Questions documents with shell redirection or pipes without reading or printing their bodies. Only the imported Questions artifact can enter the coordinator or research-worker context.
@@ -35,8 +37,8 @@ Research the approved questions autonomously as a factual documentarian. The Res
    - With `alx`, it creates a `research` artifact named `research.md` on the same task and returns only the artifact UUID.
    - With the filesystem fallback, write the result to `<artifact-dir>/research.md` and return only that path.
 7. Return only the final artifact reference to the coordinator. Then read that artifact from its canonical backend and present a concise factual summary.
-8. If questions are vague, target the wrong boundary, rely on a false premise, or omit an obvious material area, stop and report that Questions must be run again. Do not produce weak research or load another workflow skill.
+8. If questions have a small, obvious defect, correct them without restarting the workflow and record the adjustment. Return to Questions only when the defect creates material uncertainty about outcome, scope, security, data integrity, or architecture.
 
 ## Completion
 
-Complete when every question is answered or explicitly unresolved with a reason and the task-blind synthesis is stored. Report the backend and canonical artifact reference, including the task UUID for `alx`, and stop. Do not perform design or start another workflow phase. Design begins only when the user explicitly requests it.
+Complete when every material question is answered or explicitly unresolved with a reason and the task-blind synthesis is stored. Report the backend and canonical artifact reference, including the task UUID for `alx`. Continue into Design when requested by the user's original goal; otherwise stop.

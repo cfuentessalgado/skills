@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Turn the request into a small task statement and a neutral query plan for isolated research.
 
+Use the smallest safe workflow. This phase is optional when the requested outcome and material constraints are already clear. Continue into Research when the user requested broader workflow execution; stop for approval only when material ambiguity remains or the user asked to review the questions.
+
 ## Artifact storage
 
 If this phase resumes a file-backed workflow and `alx` is now available, port all existing workflow artifacts first and continue only with their `alx` UUIDs.
@@ -20,8 +22,8 @@ If this phase resumes a file-backed workflow and `alx` is now available, port al
 4. Clarify only material ambiguity in the outcome, scope, constraints, or non-goals. Do not decide architecture or detailed implementation policy.
 5. Draft 3–7 neutral research questions. Each question must investigate a distinct area or concern and ask what exists or how it works. Prefer end-to-end flow questions over yes/no questions.
 6. Include a 2–3 sentence research context that names areas to inspect without stating what will be built, why it is wanted, or which solution is preferred.
-7. Present the task statement, research context, and questions to the user. Revise them until explicitly approved.
-8. After approval, keep workflow artifacts local.
+7. Present the task statement, research context, and questions when user input is needed; otherwise store them and continue.
+8. Keep workflow artifacts local.
 9. For an existing workflow, update the canonical task statement and `questions.md` on the backend selected by the storage policy. With `alx`, update the task statement with `alx task update <task-uuid>` and the approved statement on stdin.
 10. For a new workflow when `alx` is available:
    - create one task with a short, stable task slug and the approved task statement on stdin; the task body is the `task.md` equivalent and is not duplicated as an artifact;
@@ -34,4 +36,4 @@ If this phase resumes a file-backed workflow and `alx` is now available, port al
 
 ## Completion
 
-Complete only when the user approves the task statement and the neutral query plan. Report their canonical references and stop. Do not perform research or start another workflow phase. Research begins only when the user explicitly requests it.
+Complete when the task statement and neutral query plan are clear enough for research. Report their canonical references. Continue into Research when requested by the user's original goal; otherwise stop.
