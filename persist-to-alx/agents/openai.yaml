@@ -1,0 +1,5 @@
+interface:
+  display_name: "Persist to alx"
+  short_description: "Move temporary Markdown artifacts into alx"
+policy:
+  allow_implicit_invocation: false
